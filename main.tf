@@ -2,17 +2,17 @@ provider "azurerm" {
   features {}
 }
 
-# Create a resource group
-resource "azurerm_resource_group" "rg" {
-  name     = "my-resource-group2025"
-  location = "eastus"
+# Create resource group
+resource "azurerm_resource_group" "maintask01" {
+  name     = local.rg_name
+  location = var.location
 }
 
-# Create a storage account
-resource "azurerm_storage_account" "st" {
-  name                     = "mystorageaccount20256"
-  resource_group_name      = azurerm_resource_group.rg.name
-  location                 = azurerm_resource_group.rg.location
-  account_tier             = "Standard"
-  account_replication_type = "LRS"
+# Create storage account
+resource "azurerm_storage_account" "maintask01" {
+  name                     = local.st_name
+  resource_group_name      = azurerm_resource_group.maintask01.name
+  location                 = var.location
+  account_tier             = var.account_tier
+  account_replication_type = var.account_replication_type
 }
